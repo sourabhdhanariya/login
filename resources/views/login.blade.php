@@ -18,6 +18,13 @@
                 <h1>login</h1>
                 <form action="{{ route('login')}}" method="post">
                     @csrf
+       
+                    @if(Session('msg'))
+                    <div class="alert alert-danger">
+                     <strong>{{Session('msg')}}</strong>
+                    </div>
+                    @endif
+                    
                     <div class="form-group">
                       <label for="exampleInputEmail1">Email address</label>
                       <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -35,12 +42,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
-       
-       @if(Session('msg'))
-       <div class="alert alert-danger">
-        <strong>{{Session('msg')}}</strong>
-       </div>
-       @endif
                 </div>
         </div>
        </div>

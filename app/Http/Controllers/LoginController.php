@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
@@ -35,7 +35,7 @@ class LoginController extends Controller
 
         $email = $request->email;
         $password = $request->password;
-
+        
         $user = UserModel::loginUser($email, $password);
 
         if ($user) {
@@ -44,7 +44,6 @@ class LoginController extends Controller
             return redirect('login')->with('msg', 'Invalid Credentials');
         }
     }
-
     /**
      * Log out
      * @param Request $request

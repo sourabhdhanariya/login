@@ -3,6 +3,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class UserModel
@@ -16,10 +17,8 @@ use Illuminate\Support\Facades\Session;
 class UserModel extends Model
 {
     use HasFactory;
-
-    protected $table = "user_master";
+    protected $table = "users";
     public $timestamps = false;
-
     /**
      * @param string $email
      * @param string $password
@@ -27,8 +26,8 @@ class UserModel extends Model
      */
     public static function loginUser($email, $password)
     {
-        $user = self::where('email', $email)->where('password', $password)->first();
-
+        $user = self::where('email', $email)->where('password', Hash::check('INPUT PASSWORD', $password))->first();
+        
         if ($user) {
             Session::put('id', $user->id);
             Session::put('email', $user->email);
